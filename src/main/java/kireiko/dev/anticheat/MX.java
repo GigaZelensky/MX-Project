@@ -42,6 +42,13 @@ public final class MX extends JavaPlugin {
     public void onEnable() {
         instance = this;
         saveDefaultConfig();
+        
+        // Add default config value if it doesn't exist
+        if (!getConfig().contains("checkMobs")) {
+            getConfig().set("checkMobs", false);
+            saveConfig();
+        }
+        
         loadListeners();
         punishTimer();
         this.getCommand(command).setExecutor(new CommandHandler());

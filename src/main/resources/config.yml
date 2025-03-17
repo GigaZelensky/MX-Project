@@ -1,4 +1,3 @@
-
 # %player% %check% %component% %info% %vl% %vlLimit%
 
 vlLimit: 100 # to ban
@@ -14,3 +13,6 @@ banCommand: "ban %player% 1d Unfair advantage"
 bypass: "mx.bypass"
 bcMsg: "&c&l[MX]&f %message%"
 punishEffect: false
+
+# Whether to include mob targeting in anticheat checks
+checkMobs: false

@@ -1,11 +1,13 @@
 package kireiko.dev.anticheat.checks;
 
+import kireiko.dev.anticheat.MX;
 import kireiko.dev.anticheat.api.PacketCheckHandler;
 import kireiko.dev.anticheat.api.events.RotationEvent;
 import kireiko.dev.anticheat.api.events.UseEntityEvent;
 import kireiko.dev.anticheat.api.player.PlayerProfile;
 import kireiko.dev.millennium.math.Statistics;
 import kireiko.dev.millennium.vectors.Vec2f;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
@@ -34,7 +36,9 @@ public class AimAnalysisCheck implements PacketCheckHandler {
             if (this.rawRotations.size() >= 100) this.checkRaw();
         } else if (o instanceof UseEntityEvent) {
             UseEntityEvent event = (UseEntityEvent) o;
-            if (event.isAttack() && event.getTarget() instanceof Player) {
+            boolean checkMobs = MX.getInstance().getConfig().getBoolean("checkMobs", false);
+            if (event.isAttack() && (event.getTarget() instanceof Player || 
+                                   (checkMobs && event.getTarget() instanceof LivingEntity))) {
                 this.lastAttack = System.currentTimeMillis();
             }
         }
